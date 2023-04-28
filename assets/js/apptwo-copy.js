@@ -1,8 +1,9 @@
 // Set up the SVG container
 const svg = d3.select("body")
   .append("svg")
-  .attr("width", 10000)
-  .attr("height", 100000);
+  .attr("width", 1000)
+  .attr("height", 1000)
+  .attr("class", "svg");
 
   //data
   const dEgHom = [
