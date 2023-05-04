@@ -571,6 +571,7 @@ section {
 
  .btn {
   cursor: pointer;
+  color: #00005e;
 }
 
 
@@ -649,21 +650,72 @@ section {
 /*--------------------------------------------------------------
 # Services - cards que modifique
 --------------------------------------------------------------*/
+/* .services{
+  display: flex;
+  justify-content: center;
+} */
+/* .services .filter{
+  width: 90%;
+} */
+
+.services .btn {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  padding: 8px 20px;
+  margin: 0;
+  background: #00005e;
+  color: white;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: 0px;
+}
+.services .btn-link {
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  padding: 15px 20px;
+  margin: 0;
+  color: #00005e;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: 0px;
+  text-decoration: none;
+}
+.services .btn-link:hover {
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  padding: 15px 20px;
+  margin: 0;
+  color: #7778fe;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 50px;
+  /* border: 1px solid #e2eefd; */
+  /* text-shadow: 0.5px 0.5px #7778fe; */
+}
 .services .icon-box {
   text-align: center;
   border: 1px solid #e2eefd;
   padding: 20px 10px;
+  /* margin: 5px; */
   transition: all ease-in-out 0.3s;
   background: #fff;
 }
 
 .services  img {
   border: 1px solid #deebfd;
-  width: 350px;
-  height: 200px; 
+  /* width: 350px;*/
+  height: 200px;  
   border-radius: 15px;
   margin-bottom: 20px;
   transition: ease-in-out 0.3s;
+
 }
 
 /* .services .icon-box .img {
