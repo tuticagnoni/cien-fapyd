@@ -280,3 +280,51 @@
   new PureCounter();
 
 })()
+
+
+
+
+function imgToBlue(x, image){
+  if(x == "blue")
+  {
+    image.src = './assets/img/portfolio/blue-block.png'
+  }
+  if(x == "ft1")
+  {
+    image.src = './assets/img/portfolio/imagenes-02.jpg'
+  }
+  if(x == "ft2")
+  {
+    image.src = './assets/img/portfolio/imagenes-06.jpg'
+  }
+}
+
+function BlueToImg(x, image){
+  if(x == "blue")
+  {
+    image.src = './assets/img/portfolio/blue-block.png'
+  }
+  if(x == "ft3")
+  {
+    image.src = './assets/img/portfolio/imagenes-04.jpg'
+  }
+}
+
+function lilaToImg(x, image){
+  if(x == "lila")
+  {
+    image.src = './assets/img/portfolio/lila-block.png'
+  }
+  if(x == "ft4")
+  {
+    image.src = './assets/img/portfolio/imagenes-03.jpg'
+  }
+   if(x == "ft5")
+  {
+    image.src = './assets/img/portfolio/imagenes-05.jpg'
+  }
+  if(x == "ft6")
+  {
+    image.src = './assets/img/portfolio/imagenes-07.jpg'
+  }
+}
