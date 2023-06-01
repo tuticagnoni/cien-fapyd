@@ -240,6 +240,69 @@ h6 {
   }
 }
 
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: 28px;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-weight: 400;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+  color: #106eea;
+}
+
+.navbar .dropdown:hover>ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+
+@media (max-width: 1366px) {
+  .navbar .dropdown .dropdown ul {
+    left: -90%;
+  }
+
+  .navbar .dropdown .dropdown:hover>ul {
+    left: -100%;
+  }
+}
+
 /**
 * Mobile Navigation 
 */
@@ -482,11 +545,19 @@ color: #00005e;
 background-color: #00005e;
 } */
 
-.index  .carousel-caption {
+.index  .block-text {
+  position: absolute;
+  right: 15%;
+  /* bottom: 1.25rem; */
+  left: 15%;
+  /* padding-top: 1.25rem;
+  padding-bottom: 1.25rem; */
+  color: #fff;
+  text-align: center;
   font-weight: 600;
   font-size: 1.5rem;
-  top: 40%;
-  border: solid black;
+  top: 50%;
+  /* border: solid black; */
   
 }
 /* .index .photo-box-2 .carousel-caption {
@@ -561,13 +632,13 @@ background-color: #00005e;
 --------------------------------------------------------------*/
 .testimonials {
   padding: 80px 0;
-  background: url("../img/hero-bg.jpeg") no-repeat;
+  background: url("../img/fondo.png") no-repeat;
   background-position: center center;
   background-size: cover;
   position: relative;
 }
 
-.testimonials::before {
+/* .testimonials::before {
   content: "";
   position: absolute;
   left: 0;
@@ -575,7 +646,7 @@ background-color: #00005e;
   top: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
-}
+} */
 
 .testimonials .section-header {
   margin-bottom: 40px;
@@ -592,9 +663,8 @@ background-color: #00005e;
 }
 
 .testimonials .testimonial-item .testimonial-img {
-  width: 100px;
+  width: 120px;
   border-radius: 50%;
-  border: 6px solid rgba(255, 255, 255, 0.15);
   margin: 0 auto;
 }
 
@@ -605,8 +675,8 @@ background-color: #00005e;
   color: #fff;
 }
 
-.testimonials .testimonial-item h4 {
-  font-size: 14px;
+.testimonials .testimonial-item h3 span {
+font-weight: regular;
   color: #ddd;
   margin: 0 0 15px 0;
 }
@@ -722,9 +792,50 @@ section {
   background-color: #7778fe;
 }
 
+/*entrevistas*/
+
+#services .icon-box {
+  text-align: center;
+  border: 1px solid #e2eefd;
+  padding: 20px 10px;
+  /* margin: 5px; */
+  transition: all ease-in-out 0.3s;
+  background: #ebecee;
+}
+
+#services .card-body-entrevistas {
+  background-color: #d0d0ff;
+  border-radius: 2px;
+  margin-top: 2%;
+  
+  }
+
+#services .entrevista-title {
+  color: #00005e;
+  text-transform: none;
+  text-align: left;
+  padding-left: 5%;
+  padding-top: 4%;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#services .entrevista-title span{
+  color: #00005e;
+  text-transform: none;
+  text-align: left;
+  font-weight: 800;
+}
+
+
+
 /*--------------------------------------------------------------
 # Organigramas
 --------------------------------------------------------------*/
+.organigrama{
+  height: 70%;
+  width: 70%;
+}
 .organigramas .btns .btn-filters {
   font-size: 15px;
   font-weight: 700;
@@ -1148,8 +1259,8 @@ section {
 
 #footer .footer-top .footer-links ul li {
   padding: 10px 0;
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
 }
 
 #footer .footer-top .footer-links ul li:first-child {
@@ -1204,10 +1315,8 @@ section {
 
 @media (max-width: 768px) {
 
-  #footer .copyright,
-  #footer .credits {
-    float: none;
-    text-align: center;
-    padding: 2px 0;
+  #footer .footer-top .footer-links ul li {
+    display: flex;
+    justify-content: center;
   }
 }
