@@ -31,9 +31,17 @@
     <!--D3 - Graficos-->
     <script src="../dist/d3.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-scale@4" defer></script>
+
+    <style>
+      .svg-container {
+  margin: 0 auto; /* Centra el contenedor horizontalmente si es necesario */
+  max-width: 30%; /* Evita que el contenedor sea más ancho que el tamaño de la ventana */
+}
+  
+    </style>
    
 </head>
-<body>
+<body >
  <!-- ======= Header ======= -->
  <header id="header" class="d-flex align-items-center">
   <div class="container d-flex align-items-center justify-content-between">
@@ -74,6 +82,9 @@
        <button id="egButton" class="btn-graficos" type="submit">Egresados</button>
        <button id="showSedesButton" class="btn-graficos" type="submit">Sedes</button>
        <button id="showPlanesButton" class="btn-graficos" type="submit">Planes de Estudio</button>
+    </div>
+    <div id="svg-container">
+
     </div>
     </main>
 
@@ -119,6 +130,7 @@
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
    <!--Graficos Script-->
-   <script src="../assets/js/apptwo-copy.js" defer></script>
-</body>
+   <script src="../assets/js/apptwo-copy.js" defer type="module"></script>
+
+ </body>
 </html>
