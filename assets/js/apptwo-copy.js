@@ -1,18 +1,19 @@
 //CONSTANTES SVG
-const svgMargin = 200;
-const svgPadding = 200;
+const svgMargin = 500;
+const svgPadding = 500;
 const svgWidth = 10700;
 const svgHeight = 1000;
 
 // Set up the SVG container
-const svg = d3.select("body")
+const svg = d3.select("#svg-container")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight)
   .attr("margin", svgMargin)
   .attr("padding", svgPadding)
   .attr("class", "svg")
-  .attr("id", "my-svg");
+  .attr("id", "my-svg")
+  ;
 
 //DATA
 const dEgHom = [
@@ -432,6 +433,7 @@ const  dInMuj = [
 
 //AREA CHARTS - INGRESANTES Y EGRESADOS ONLY
 //Declarando las escalas para que esten disponibles para todas las funciones de manera global
+
 const xScale = d3.scaleLinear()
   .domain([1923, 2023]) //numeros del eje x
   .range([50, 2000]);
@@ -481,7 +483,7 @@ function createAxis() {
     drawAxis();
   // Make the horizontal axis larger
   svg.select("g.xAxis")
-    .attr("width", 10000);
+    .attr("width", svgWidth);
   svg.selectAll('text') 
     .style('font-size', '20px')
     .style('font-family', 'Ruda, sans-serif');  
@@ -548,10 +550,10 @@ function drawGraph(data1, data2, color, prefix) {
 
   // Check if graphDrawn is false
   if (prefix === "in" && !graphDrawnIn) {
-    graphDrawnIn = true;
+    graphDrawnIn = false;
     showWords();
   } else if (prefix === "eg" && !graphDrawnEg) {
-    graphDrawnEg = true;
+    graphDrawnEg = false;
     showWords();
   } else {
     return;
@@ -578,8 +580,8 @@ function clearGraph(prefix) {
     }
   });
   graphIds = graphIds.filter(id => !id.startsWith(prefix));
-  graphDrawn = false;
-  console.log(graphDrawn)
+  graphDrawnIn = false;
+  graphDrawnEg = false;
   console.log(graphIds)
 
   // Eliminar el ID del gráfico de la lista de IDs
@@ -722,34 +724,120 @@ foreignObjects.append("xhtml:p")
   .html(d => `<a href="${d.link}" style="color: black; font-weight: bold" target="_blank">Sede<br>${d.anos}</a>`);
 
 
-d3.select("#showSedesButton").on("click", function() {
-  const rectGroup = d3.select("#rect-group");
-  const isVisible = rectGroup.style("opacity") === "1";
+  d3.select("#showSedesButton").on("click", function() {
+    const rectGroup = d3.select("#rect-group");
+    const isVisible = rectGroup.style("opacity") === "1";
+  
+    rectGroup
+      .style("display", "block") // Mostrar el grupo de rectángulos antes de la transición
+      .transition()
+      .duration(500) // Duración de la transición en milisegundos
+      .style("opacity", isVisible ? 0 : 1) // Cambiar la opacidad según la visibilidad actual;
+  
+    rectGroup.selectAll("rect")
+      .transition()
+      .duration(500)
+      .delay(500) // Retraso de 500ms antes de mostrar las rectas
+      .style("opacity", 1);
+  
+    rectGroup.selectAll("foreignObject")
+      .transition()
+      .duration(500)
+      .delay(500) // Retraso de 500ms antes de mostrar el texto
+      .style("opacity", 1);
+  });
 
-  rectGroup
-    .style("display", "block") // Mostrar el grupo de rectángulos antes de la transición
+//PLANES DE ESTUDIO
+// Círculos con contenido HTML y línea horizontal
+const circleGroup = svg.append("g")
+  .attr("id", "circle-group")
+  .style("opacity", 0);
+
+const circleData = [
+  { cx: 50, cy: 100, color: "#102253", word: "1923", link: "../assets/files/planes/1923.pdf" },
+  { cx: 610, cy: 100, color: "#102253", word: "1953", link: "../assets/files/planes/1953.pdf" },
+  { cx: 750, cy: 100, color: "#102253", word: "1957", link: "../assets/files/planes/1957.pdf" },
+  { cx: 990, cy: 100, color: "#102253", word: "1972", link: "../assets/files/planes/1972.pdf" },
+  { cx: 1100, cy: 100, color: "#102253", word: "1976", link: "../assets/files/planes/1976.pdf" },
+  { cx: 1273, cy: 100, color: "#102253", word: "1985", link: "../assets/files/planes/1985.pdf" },
+  { cx: 1710, cy: 100, color: "#102253", word: "2009", link: "../assets/files/planes/2009.pdf" },
+];
+
+const circles = circleGroup.selectAll("circle")
+  .data(circleData)
+  .enter()
+  .append("circle")
+  .attr("cx", d => d.cx)
+  .attr("cy", d => d.cy)
+  .attr("r", 33)
+  .attr("z-index", 4)
+  .attr("fill", d => d.color)
+  .on("click", d => {
+    window.open(d.link, "_blank");
+  });
+
+  const line = circleGroup.append("line")
+  .attr("x1", 50)
+  .attr("y1", 100)
+  .attr("x2", 2000)
+  .attr("y2", 100)
+  .attr("z-index", 2)
+  .attr("stroke-dasharray", "10")
+  .attr("stroke", "black");
+
+const foreignObjects3 = circleGroup.selectAll("foreignObject")
+  .data(circleData)
+  .enter()
+  .append("foreignObject")
+  .attr("x", d => d.cx - 50)
+  .attr("y", d => d.cy - 22)
+  .attr("width", 100)
+  .attr("height", 100);
+
+const links = foreignObjects3.append("xhtml:div")
+  .style("display", "flex")
+  .style("align-items", "center")
+  .style("justify-content", "center")
+  .style("text-align", "center");
+
+links.append("xhtml:p")
+  .style("font-size", "15px")
+  .style("color", "white")
+  .style("font-weight", "bold")
+  .style("text-decoration", "none")
+  .style("margin", "0")
+  .style("padding", "0")
+  .html(d => `<a href="${d.link}" target="_blank" style="color: white; z-index: 4">Plan<br>${d.word}</a>`);
+
+// Botón para mostrar/ocultar los círculos y la línea
+d3.select("#showPlanesButton").on("click", function() {
+  const group = svg.select("#circle-group");
+  const isVisible = group.style("opacity") === "1";
+
+  group
+    .style("display", "block")
     .transition()
-    .duration(500) // Duración de la transición en milisegundos
-    .style("opacity", isVisible ? 0 : 1) // Cambiar la opacidad según la visibilidad actual
-
-    .on("end", function() {
-      if (!isVisible) {
-        rectGroup.selectAll("foreignObject") // Asegurarse de que los elementos estén visibles
-          .style("opacity", 0)
-          .transition()
-          .duration(500)
-          .style("opacity", 1);
-      }
-    });
-  // const rectGroup = d3.select("#rect-group");
-  // const isVisible = rectGroup.style("display") !== "none";
-
-  // if (isVisible) {
-  //   rectGroup.style("display", "none");
-  // } else {
-  //   rectGroup.style("display", "block");
-  // }
+    .duration(500)
+    .style("opacity", isVisible ? 0 : 1);
 });
 
 
 
+
+// Función para escalar el SVG al tamaño de la pantalla
+// function scaleSVG() {
+//   const svg = d3.select("svg"); // Selecciona el elemento SVG
+
+//   const screenWidth = window.innerWidth; // Ancho de la pantalla
+//   const targetWidth = screenWidth * 0.8; // Calcula el ancho objetivo (80% del ancho de la pantalla)
+
+//   const svgWidth = svg.attr("width"); // Ancho actual del SVG
+
+//   const scaleRatio = targetWidth / svgWidth; // Calcula el factor de escala
+
+//   svg.style("transform", `scale(${scaleRatio})`); // Aplica la transformación de escala al SVG
+// }
+
+// // Ejecuta la función de escala al cargar la página y al cambiar el tamaño de la ventana
+// window.addEventListener("load", scaleSVG);
+// window.addEventListener("resize", scaleSVG);
